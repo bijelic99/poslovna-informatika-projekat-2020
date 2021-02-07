@@ -33,4 +33,7 @@ public class PoslovniPartner {
     @NonNull
     @Enumerated(EnumType.STRING)
     private VrstaPartnera vrstaPartnera;
+
+    @ManyToOne
+    private NaseljenoMesto naseljenoMesto;
 }
