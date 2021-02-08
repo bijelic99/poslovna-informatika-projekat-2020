@@ -1,9 +1,7 @@
 package org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository;
 
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.PoslovnaGodina;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@RepositoryRestResource(collectionResourceRel = "poslovna-godina", path = "poslovne-godine")
-public interface PoslovnaGodinaRepository extends PagingAndSortingRepository<PoslovnaGodina, String> {
+public interface PoslovnaGodinaRepository extends JpaRepository<PoslovnaGodina, String> {
 }

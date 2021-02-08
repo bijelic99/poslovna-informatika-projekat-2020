@@ -1,9 +1,7 @@
 package org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository;
 
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.StavkaFakture;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@RepositoryRestResource(collectionResourceRel = "stavka-fakture", path = "stavke-fakture")
-public interface StavkaFaktureRepository extends PagingAndSortingRepository<StavkaFakture, String> {
+public interface StavkaFaktureRepository extends JpaRepository<StavkaFakture, String> {
 }
