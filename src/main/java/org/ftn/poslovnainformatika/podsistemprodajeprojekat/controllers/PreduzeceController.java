@@ -19,6 +19,11 @@ public class PreduzeceController {
     @Autowired
     PreduzeceRepository preduzeceRepository;
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Preduzece> getPreduzece(@PathVariable("id") String id) {
+        return preduzeceRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping(value = "/{id}/partneri")
     public ResponseEntity<Set<PoslovniPartner>> getPoslovniPartneri(@PathVariable("id") String id) {
         return preduzeceRepository.findById(id).map(Preduzece::getPoslovniPartneri).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());

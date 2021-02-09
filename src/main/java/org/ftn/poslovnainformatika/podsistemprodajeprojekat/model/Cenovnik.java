@@ -1,5 +1,6 @@
 package org.ftn.poslovnainformatika.podsistemprodajeprojekat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -24,6 +25,7 @@ public class Cenovnik {
     private String id;
 
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate vaziOd;
 
     @NonNull
