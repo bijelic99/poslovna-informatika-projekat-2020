@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -59,5 +60,5 @@ public class Faktura {
 
     @NonNull
     @OneToMany(orphanRemoval = true)
-    private Set<StavkaFakture> stavke;
+    private Set<StavkaFakture> stavke = new HashSet<>();
 }
