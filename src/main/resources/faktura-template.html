@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Faktura</title>
+</head>
+<body>
+<div>
+    <h1>Faktura broj <span th:text="${faktura.brojFakture}"></span></h1>
+    <div>
+        <ul>
+            <li>Id: <span th:text="${faktura.id}"></span></li>
+            <li>Godina: <span th:text="${faktura.poslovnaGodina.godina}"></span></li>
+            <li>Datum fakture: <span th:text="${faktura.datumFakture}"></span></li>
+            <li>Datum valute: <span th:text="${faktura.datumValute}"></span></li>
+            <li>Faktura zatvorena: <span th:text="${faktura.fakturaGotova}"></span></li>
+            <li>Kupac: <span th:text="${faktura.kupac.naziv}"></span></li>
+        </ul>
+    </div>
+    <div>
+        <h3>Stavke:</h3>
+        <table>
+            <tr>
+                <th>Redni br.</th>
+                <th>Naziv robe/usluge</th>
+                <th>Jedinica mere</th>
+                <th>Kolicina</th>
+                <th>Cena bez PDV</th>
+                <th>Rabat</th>
+                <th>Osnovica</th>
+                <th>PDV %</th>
+                <th>PDV Iznos</th>
+                <th>Ukupno</th>
+            </tr>
+            <tr th:each="st, iter : ${faktura.stavke}">
+                <td th:text="${iter.index}"></td>
+                <td th:text="${st.robaIliUsluga.naziv}"></td>
+                <td th:text="${st.robaIliUsluga.jedinicaMere.naziv}"></td>
+                <td th:text="${st.kolicina}"></td>
+                <td th:text="${st.kolicina * st.jedinicnaCena}"></td>
+                <td th:text="${st.rabat}"></td>
+                <td th:text="${st.osnovicaZaPDV}"></td>
+                <td th:text="${st.PDVStopa}"></td>
+                <td th:text="${st.iznosPDV}"></td>
+                <td th:text="${st.ukupanIznos}"></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h3>PDV</h3>
+        <table>
+            <tr>
+                <th>
+                    Tarifa %
+                </th>
+                <th>
+                    Osnovica
+                </th>
+                <th>
+                    PDV iznos
+                </th>
+                <th>
+                    Vrednost sa PDV
+                </th>
+            </tr>
+            <tr th:each="pdv : ${pdvSuma}">
+                <td th:text="${pdv.tarifa}"></td>
+                <td th:text="${pdv.osnovica}"></td>
+                <td th:text="${pdv.pdvIznos}"></td>
+                <td th:text="${pdv.vrednostSaPdv}"></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h3>Ukupno</h3>
+        <ul>
+            <li>Rabat: <span th:text="${ukupanRabat}"></span></li>
+            <li>Osnovica: <span th:text="${faktura.ukupnaOsnovica}"></span></li>
+            <li>PDV: <span th:text="${faktura.ukupanPDV}"></span></li>
+            <li>Vrednost: <span th:text="${faktura.ukupanIznos}"></span></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

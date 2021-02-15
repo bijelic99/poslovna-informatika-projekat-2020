@@ -5,6 +5,8 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.FakturaRe
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.services.CenovnikService;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.services.FakturaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,12 @@ public class FakturaController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Faktura> getFaktura(@PathVariable("id") String id) {
         return fakturaRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping(value = "/{id}/pdf")
+    public ResponseEntity<InputStreamResource> getFakturaPdf(@PathVariable("id") String id) {
+        return fakturaService.getFakturaPdf(id).map(inputStreamResource -> ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).body(inputStreamResource))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
