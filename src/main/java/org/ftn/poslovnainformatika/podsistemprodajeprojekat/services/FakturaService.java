@@ -6,10 +6,13 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.StavkaCenovnik
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.StavkaFakture;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.FakturaRepository;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.StavkaFaktureRepository;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,5 +65,11 @@ public class FakturaService {
         novaFaktura.setBrojFakture(fakturaRepository.getPoslednjiBrojFaktureZaGodinu(faktura.getPoslovnaGodina().getGodina()).orElse(0) + 1);
         faktura.setFakturaGotova(false);
         return saveFaktura(faktura);
+    }
+
+    public List<Faktura> searchFakture(LocalDate datumOd, LocalDate datumDo) {
+        return fakturaRepository.findAll().
+                stream().filter(x -> x.getDatumFakture().isAfter(datumOd) && x.getDatumFakture().isBefore(datumDo))
+                .collect(Collectors.toList());
     }
 }

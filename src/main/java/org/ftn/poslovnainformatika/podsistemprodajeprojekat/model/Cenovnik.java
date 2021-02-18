@@ -25,7 +25,6 @@ public class Cenovnik {
     private String id;
 
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate vaziOd;
 
     @NonNull
