@@ -8,6 +8,7 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.StavkaCenovnik
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.StavkaFakture;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.FakturaRepository;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.StavkaFaktureRepository;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,15 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Comparator;
 import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -76,6 +82,12 @@ public class FakturaService {
         return saveFaktura(faktura);
     }
 
+
+    public List<Faktura> searchFakture(LocalDate datumOd, LocalDate datumDo) {
+        return fakturaRepository.findAll().
+                stream().filter(x -> x.getDatumFakture().isAfter(datumOd) && x.getDatumFakture().isBefore(datumDo))
+                .collect(Collectors.toList());
+    }
     public Optional<InputStreamResource> getFakturaPdf(String id) {
         return fakturaRepository.findById(id).map(faktura -> {
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
