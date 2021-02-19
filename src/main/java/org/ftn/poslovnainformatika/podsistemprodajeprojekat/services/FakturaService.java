@@ -18,14 +18,11 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Comparator;
-import java.util.Optional;
 
 import java.util.stream.Collectors;
 
@@ -39,6 +36,11 @@ public class FakturaService {
 
     @Autowired
     StavkaFaktureRepository stavkaFaktureRepository;
+
+    public List<Faktura> getFakture() {
+        System.out.println(fakturaRepository.findAll());
+        return fakturaRepository.findAll();
+    }
 
     public Faktura saveFaktura(Faktura faktura) {
         var azuriranaFaktura = faktura;

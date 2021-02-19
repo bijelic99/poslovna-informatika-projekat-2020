@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/fakture")
 public class FakturaController {
@@ -24,6 +26,11 @@ public class FakturaController {
 
     @Autowired
     CenovnikService cenovnikService;
+
+    @GetMapping
+    public List<Faktura> getFakture() {
+        return fakturaService.getFakture();
+    }
 
     @PutMapping
     public Faktura putFaktura(@RequestBody Faktura faktura) {
