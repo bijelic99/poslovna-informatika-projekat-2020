@@ -24,13 +24,13 @@ public class PDVStopaService {
     }
 
     public PDVStopa updatePdvStopa(String id, PDVStopa pdvStopa) {
-        var updatedPdvStopa = pdvStopaRepository.getOne(id);
-        if (updatedPdvStopa != null) {
-            updatedPdvStopa.setId(id);
+        var updatedPdvStopa = pdvStopaRepository.findById(id).orElse(null);
+        if(updatedPdvStopa != null) {
             updatedPdvStopa.setDatumVazenja(pdvStopa.getDatumVazenja());
             updatedPdvStopa.setProcenat(pdvStopa.getProcenat());
-            return pdvStopaRepository.save(pdvStopa);
+            return pdvStopaRepository.save(updatedPdvStopa);
         }
+
         return null;
     }
 
