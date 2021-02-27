@@ -18,8 +18,8 @@ INSERT INTO PDVKATEGORIJA_STOPEPDV VALUES('b1d9b0da-c971-4150-b4cb-32d6414e1f15'
 
 INSERT INTO GRUPA_ROBE_ILI_USLUGE VALUES('1', 'Neka grupa', '049b02cc-e304-482b-927e-8c06dd2e1a7c');
 
-INSERT INTO ROBA_ILI_USLUGA VALUES('1','Mleko', 'Sveze mleko', true, '1', '3');
-INSERT INTO ROBA_ILI_USLUGA VALUES('2','Jogurt', 'Jogurt u flasi', true, '1', '3');
+INSERT INTO ROBA_ILI_USLUGA(id, naziv, opis, roba, grupa_robe_ili_usluge_id, jedinica_mere_id, obrisan) VALUES('1','Mleko', 'Sveze mleko', true, '1', '3', false);
+INSERT INTO ROBA_ILI_USLUGA(id, naziv, opis, roba, grupa_robe_ili_usluge_id, jedinica_mere_id, obrisan) VALUES('2','Jogurt', 'Jogurt u flasi', true, '1', '3', false);
 
 INSERT INTO STAVKA_CENOVNIKA VALUES('1', 150, '1');
 INSERT INTO STAVKA_CENOVNIKA VALUES('2', 130, '2');

@@ -35,4 +35,7 @@ public class RobaIliUsluga {
     @NonNull
     @ManyToOne
     private GrupaRobeIliUsluge grupaRobeIliUsluge;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

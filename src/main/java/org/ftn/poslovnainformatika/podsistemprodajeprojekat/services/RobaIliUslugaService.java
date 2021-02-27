@@ -38,7 +38,8 @@ public class RobaIliUslugaService {
     public boolean removeRobaIliUsluga(String id) {
         var robaIliUsulga = robaIliUslugaRepository.getOne(id);
         if (robaIliUsulga != null) {
-            robaIliUslugaRepository.delete(robaIliUsulga);
+            robaIliUsulga.setObrisan(true);
+            robaIliUslugaRepository.save(robaIliUsulga);
             return true;
         }
         return false;
