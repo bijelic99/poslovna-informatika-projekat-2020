@@ -79,4 +79,22 @@ public class CenovnikService {
         stavkaCenovnikaRepository.saveAll(noveStavkeCenovnika);
         return cenovnikRepository.save(kopiraniCenovnik);
     }
+
+    public Cenovnik updateCenovnik(String id, Cenovnik cenovnik) {
+        var updatedCenovnik = cenovnikRepository.getOne(id);
+        if (updatedCenovnik != null) {
+            updatedCenovnik.setVaziOd(cenovnik.getVaziOd());
+            return cenovnikRepository.save(updatedCenovnik);
+        }
+        return null;
+    }
+
+    public boolean removeCenovnik(String id) {
+        var cenovnik = cenovnikRepository.getOne(id);
+        if (cenovnik != null) {
+            cenovnikRepository.delete(cenovnik);
+            return true;
+        }
+        return false;
+    }
 }

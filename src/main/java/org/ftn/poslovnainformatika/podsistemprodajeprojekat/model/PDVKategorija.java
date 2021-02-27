@@ -3,12 +3,10 @@ package org.ftn.poslovnainformatika.podsistemprodajeprojekat.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.engine.internal.Cascade;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +24,6 @@ public class PDVKategorija {
     private String nazivKategorije;
 
     @NonNull
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<PDVStopa> stopePDV = new HashSet<>();
 }

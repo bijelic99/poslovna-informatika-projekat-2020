@@ -33,4 +33,20 @@ public class CenovnikController {
     public ResponseEntity copyCenovnik(@RequestBody Cenovnik cenovnik, @PathVariable int procenat, @PathVariable Boolean povecanje) {
         return new ResponseEntity(cenovnikService.copyCenovnik(cenovnik, procenat, povecanje), HttpStatus.CREATED);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity removeCenovnik(@PathVariable String id) {
+        if (cenovnikService.removeCenovnik(id)) {
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Cenovnik> updateCenovnik(@PathVariable String id, @RequestBody Cenovnik cenovnik) {
+        if (id != null) {
+            return new ResponseEntity<>(cenovnikService.updateCenovnik(id, cenovnik), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

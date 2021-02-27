@@ -7,10 +7,7 @@ import lombok.NonNull;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +25,6 @@ public class Cenovnik {
     private LocalDate vaziOd;
 
     @NonNull
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<StavkaCenovnika> stavkeCenovnika = new HashSet<>();
 }

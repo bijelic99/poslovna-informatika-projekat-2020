@@ -48,8 +48,10 @@ public class FakturaController {
     }
 
     @GetMapping(value = "/{datumOd}/{datumDo}")
-    public ResponseEntity searchFakture(@PathVariable LocalDate datumOd, @PathVariable LocalDate datumDo) {
-        return new ResponseEntity(fakturaService.searchFakture(datumOd, datumDo), HttpStatus.OK);
+    public ResponseEntity searchFakture(@PathVariable String datumOd, @PathVariable String datumDo) {
+        LocalDate dateFrom = new LocalDate(datumOd);
+        LocalDate dateTo = new LocalDate(datumDo);
+        return new ResponseEntity(fakturaService.searchFakture(dateFrom, dateTo), HttpStatus.OK);
     }
   
     @GetMapping(value = "/{id}/pdf")
