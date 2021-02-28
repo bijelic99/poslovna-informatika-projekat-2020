@@ -25,4 +25,7 @@ public class GrupaRobeIliUsluge {
 
     @ManyToOne
     private PDVKategorija pdvKategorija;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

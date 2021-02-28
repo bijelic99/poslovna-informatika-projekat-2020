@@ -12,6 +12,7 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -27,6 +28,7 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class FakturaService {
     @Autowired
     FakturaRepository fakturaRepository;

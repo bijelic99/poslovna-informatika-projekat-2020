@@ -47,4 +47,7 @@ public class Preduzece {
 
     @ManyToOne
     private NaseljenoMesto naseljenoMesto;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

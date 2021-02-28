@@ -9,10 +9,12 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.StavkaCen
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class CenovnikService {
     @Autowired
     PreduzeceRepository preduzeceRepository;
@@ -81,7 +83,7 @@ public class CenovnikService {
     }
 
     public Cenovnik updateCenovnik(String id, Cenovnik cenovnik) {
-        var updatedCenovnik = cenovnikRepository.getOne(id);
+        var updatedCenovnik = cenovnikRepository.findById(id).orElse(null);
         if (updatedCenovnik != null) {
             updatedCenovnik.setVaziOd(cenovnik.getVaziOd());
             return cenovnikRepository.save(updatedCenovnik);
@@ -90,9 +92,10 @@ public class CenovnikService {
     }
 
     public boolean removeCenovnik(String id) {
-        var cenovnik = cenovnikRepository.getOne(id);
+        var cenovnik = cenovnikRepository.findById(id).orElse(null);
         if (cenovnik != null) {
-            cenovnikRepository.delete(cenovnik);
+            cenovnik.setObrisan(true);
+            cenovnikRepository.save(cenovnik);
             return true;
         }
         return false;

@@ -27,4 +27,7 @@ public class Cenovnik {
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
     private Set<StavkaCenovnika> stavkeCenovnika = new HashSet<>();
+
+    @NonNull
+    private Boolean obrisan = false;
 }

@@ -24,4 +24,7 @@ public class NaseljenoMesto {
 
     @NonNull
     private String nazivMesta;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

@@ -36,4 +36,7 @@ public class PoslovniPartner {
 
     @ManyToOne
     private NaseljenoMesto naseljenoMesto;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

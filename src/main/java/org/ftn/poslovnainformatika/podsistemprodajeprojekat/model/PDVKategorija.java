@@ -26,4 +26,7 @@ public class PDVKategorija {
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
     private Set<PDVStopa> stopePDV = new HashSet<>();
+
+    @NonNull
+    private Boolean obrisan = false;
 }

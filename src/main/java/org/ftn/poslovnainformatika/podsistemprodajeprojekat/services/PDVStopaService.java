@@ -4,11 +4,13 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.PDVStopa;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.PDVStopaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class PDVStopaService {
 
     @Autowired
@@ -35,9 +37,10 @@ public class PDVStopaService {
     }
 
     public boolean removePdvStopa(String id) {
-        var pdvStopa = pdvStopaRepository.getOne(id);
+        var pdvStopa = pdvStopaRepository.findById(id).orElse(null);
         if (pdvStopa != null) {
-            pdvStopaRepository.delete(pdvStopa);
+            pdvStopa.setObrisan(true);
+            pdvStopaRepository.save(pdvStopa);
             return true;
         }
         return false;

@@ -44,4 +44,7 @@ public class StavkaFakture {
     @NonNull
     @ManyToOne
     private RobaIliUsluga robaIliUsluga;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

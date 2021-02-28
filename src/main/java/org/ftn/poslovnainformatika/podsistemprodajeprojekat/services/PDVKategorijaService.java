@@ -4,11 +4,14 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.PDVKategorija;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.PDVKategorijaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class PDVKategorijaService {
 
     @Autowired
@@ -34,9 +37,10 @@ public class PDVKategorijaService {
     }
 
     public boolean removePdvKategorija(String id) {
-        var pdvKategorija = pdvKategorijaRepository.getOne(id);
+        var pdvKategorija = pdvKategorijaRepository.findById(id).orElse(null);
         if (pdvKategorija != null) {
-            pdvKategorijaRepository.delete(pdvKategorija);
+            pdvKategorija.setObrisan(true);
+            pdvKategorijaRepository.save(pdvKategorija);
             return true;
         }
         return false;

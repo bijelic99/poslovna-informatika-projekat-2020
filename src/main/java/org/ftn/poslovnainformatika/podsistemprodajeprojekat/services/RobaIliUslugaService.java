@@ -4,10 +4,13 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.RobaIliUsluga;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.RobaIliUslugaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class RobaIliUslugaService {
 
     @Autowired
@@ -23,7 +26,7 @@ public class RobaIliUslugaService {
     }
 
     public RobaIliUsluga updateRobaIliUsluga(String id, RobaIliUsluga robaIliUsluga) {
-        var updatedRobaIliUsluga = robaIliUslugaRepository.getOne(id);
+        var updatedRobaIliUsluga = robaIliUslugaRepository.findById(id).orElse(null);
         if (updatedRobaIliUsluga != null) {
             updatedRobaIliUsluga.setNaziv(robaIliUsluga.getNaziv());
             updatedRobaIliUsluga.setOpis(robaIliUsluga.getOpis());
@@ -36,7 +39,7 @@ public class RobaIliUslugaService {
     }
 
     public boolean removeRobaIliUsluga(String id) {
-        var robaIliUsulga = robaIliUslugaRepository.getOne(id);
+        var robaIliUsulga = robaIliUslugaRepository.findById(id).orElse(null);
         if (robaIliUsulga != null) {
             robaIliUsulga.setObrisan(true);
             robaIliUslugaRepository.save(robaIliUsulga);

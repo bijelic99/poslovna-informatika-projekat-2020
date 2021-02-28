@@ -61,4 +61,7 @@ public class Faktura {
     @NonNull
     @OneToMany(orphanRemoval = true)
     private Set<StavkaFakture> stavke = new HashSet<>();
+
+    @NonNull
+    private Boolean obrisan = false;
 }

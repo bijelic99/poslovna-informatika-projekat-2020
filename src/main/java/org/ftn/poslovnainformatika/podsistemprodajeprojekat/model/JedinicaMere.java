@@ -23,4 +23,7 @@ public class JedinicaMere {
     private String naziv;
 
     private String skraceniNaziv;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

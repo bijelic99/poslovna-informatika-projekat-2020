@@ -25,4 +25,7 @@ public class StavkaCenovnika {
 
     @ManyToOne
     private RobaIliUsluga robaIliUsluga;
+
+    @NonNull
+    private Boolean obrisan = false;
 }

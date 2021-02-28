@@ -4,11 +4,13 @@ import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.GrupaRobeIliUs
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.GrupaRobeIliUslugeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class GrupaRobeIliUslugeService {
 
     @Autowired
@@ -24,7 +26,7 @@ public class GrupaRobeIliUslugeService {
     }
 
     public GrupaRobeIliUsluge updateGrupaRobeIliUsluge(String id, GrupaRobeIliUsluge grupaRobeIliUsluge) {
-        var updatedGrupa = grupaRobeIliUslugeRepository.getOne(id);
+        var updatedGrupa = grupaRobeIliUslugeRepository.findById(id).orElse(null);
         if (updatedGrupa != null) {
             updatedGrupa.setNaziv(grupaRobeIliUsluge.getNaziv());
             updatedGrupa.setPdvKategorija(grupaRobeIliUsluge.getPdvKategorija());
@@ -34,9 +36,10 @@ public class GrupaRobeIliUslugeService {
     }
 
     public boolean removeGrupaRobeIliUsluge(String id) {
-        var grupa = grupaRobeIliUslugeRepository.getOne(id);
+        var grupa = grupaRobeIliUslugeRepository.findById(id).orElse(null);
         if (grupa != null) {
-            grupaRobeIliUslugeRepository.delete(grupa);
+            grupa.setObrisan(true);
+            grupaRobeIliUslugeRepository.save(grupa);
             return true;
         }
         return false;

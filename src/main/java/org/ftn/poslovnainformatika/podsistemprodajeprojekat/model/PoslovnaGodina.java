@@ -24,4 +24,7 @@ public class PoslovnaGodina {
 
     @NonNull
     private Boolean zakljucena = false;
+
+    @NonNull
+    private Boolean obrisan = false;
 }
