@@ -24,7 +24,7 @@ public class PDVKategorijaService {
     }
 
     public PDVKategorija updatePdvKategorija(String id, PDVKategorija pdvKategorija) {
-        var updatedPdvKategorija = pdvKategorijaRepository.getOne(id);
+        var updatedPdvKategorija = pdvKategorijaRepository.findById(id).orElse(null);
         if (updatedPdvKategorija != null) {
             updatedPdvKategorija.setNazivKategorije(pdvKategorija.getNazivKategorije());
             updatedPdvKategorija.setStopePDV(pdvKategorija.getStopePDV());
