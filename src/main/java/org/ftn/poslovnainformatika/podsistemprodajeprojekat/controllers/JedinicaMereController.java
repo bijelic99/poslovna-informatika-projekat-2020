@@ -28,8 +28,9 @@ public class JedinicaMereController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<JedinicaMere> updateJedinicaMere(@PathVariable String id, @RequestBody JedinicaMere jedinicaMere) {
-        if (id != null) {
-            return new ResponseEntity<>(jedinicaMereService.updateJedinicaMere(id,jedinicaMere), HttpStatus.OK);
+        var jedMere = jedinicaMereService.updateJedinicaMere(id,jedinicaMere);
+        if (jedMere != null) {
+            return new ResponseEntity<>(jedMere, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -29,8 +29,9 @@ public class PDVKategorijaController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<PDVKategorija> updatePdvKategorija(@PathVariable String id, @RequestBody PDVKategorija pdvKategorija) {
-        if (id != null) {
-            return new ResponseEntity<>(pdvKategorijaService.updatePdvKategorija(id, pdvKategorija), HttpStatus.OK);
+        var kategorija = pdvKategorijaService.updatePdvKategorija(id, pdvKategorija);
+        if (kategorija != null) {
+            return new ResponseEntity<>(kategorija, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -18,7 +19,7 @@ public class PDVKategorijaService {
     private PDVKategorijaRepository pdvKategorijaRepository;
 
     public List<PDVKategorija> getPdvKategorije() {
-        return pdvKategorijaRepository.findAll();
+        return pdvKategorijaRepository.findAll().stream().filter(x -> !x.getObrisan()).collect(Collectors.toList());
     }
 
     public PDVKategorija createPdvKategorija(PDVKategorija pdvKategorija) {

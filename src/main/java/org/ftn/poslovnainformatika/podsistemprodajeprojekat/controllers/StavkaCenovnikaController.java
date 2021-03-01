@@ -16,8 +16,9 @@ public class StavkaCenovnikaController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<StavkaCenovnika> updateStavkaCenovnika(@PathVariable String id, @RequestBody StavkaCenovnika stavkaCenovnika) {
-        if (id != null) {
-            return new ResponseEntity<>(stavkaCenovnikaService.updateStavkaCenovnika(id, stavkaCenovnika), HttpStatus.OK);
+        var stavka = stavkaCenovnikaService.updateStavkaCenovnika(id, stavkaCenovnika);
+        if (stavka != null) {
+            return new ResponseEntity<>(stavka, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

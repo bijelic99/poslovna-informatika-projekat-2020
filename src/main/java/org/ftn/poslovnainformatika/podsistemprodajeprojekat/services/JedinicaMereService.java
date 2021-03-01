@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class JedinicaMereService {
     private JedinicaMereRepository jedinicaMereRepository;
 
     public List<JedinicaMere> getJediniceMere() {
-        return jedinicaMereRepository.findAll();
+        return jedinicaMereRepository.findAll().stream().filter(x -> !x.getObrisan()).collect(Collectors.toList());
     }
 
     public JedinicaMere createJedinicaMere(JedinicaMere jedinicaMere) {

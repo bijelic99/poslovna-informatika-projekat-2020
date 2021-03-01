@@ -26,7 +26,11 @@ public class CenovnikController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity getCenovnik(@PathVariable String id) {
-        return new ResponseEntity(cenovnikService.getCenovnik(id), HttpStatus.OK);
+        var cenovnik = cenovnikService.getCenovnik(id);
+        if (cenovnik != null) {
+            return new ResponseEntity(cenovnik, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(value = "/{procenat}/{povecanje}")
@@ -44,8 +48,9 @@ public class CenovnikController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Cenovnik> updateCenovnik(@PathVariable String id, @RequestBody Cenovnik cenovnik) {
-        if (id != null) {
-            return new ResponseEntity<>(cenovnikService.updateCenovnik(id, cenovnik), HttpStatus.OK);
+        var c = cenovnikService.updateCenovnik(id, cenovnik);
+        if (c != null) {
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

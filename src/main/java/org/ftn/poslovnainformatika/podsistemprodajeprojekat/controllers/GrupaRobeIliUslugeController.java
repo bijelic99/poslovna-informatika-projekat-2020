@@ -28,8 +28,9 @@ public class GrupaRobeIliUslugeController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<GrupaRobeIliUsluge> updateGrupaRobeIliUsluge(@PathVariable String id, @RequestBody GrupaRobeIliUsluge grupaRobeIliUsluge) {
-        if (id != null) {
-            return new ResponseEntity<>(grupaRobeIliUslugeService.updateGrupaRobeIliUsluge(id, grupaRobeIliUsluge), HttpStatus.OK);
+        var grupa = grupaRobeIliUslugeService.updateGrupaRobeIliUsluge(id, grupaRobeIliUsluge);
+        if (grupa != null) {
+            return new ResponseEntity<>(grupa, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

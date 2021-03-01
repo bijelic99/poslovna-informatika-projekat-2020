@@ -28,8 +28,9 @@ public class RobaIliUslugaController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<RobaIliUsluga> updateRObaIliUsluga(@PathVariable String id, @RequestBody RobaIliUsluga robaIliUsluga) {
-        if (id != null) {
-            return new ResponseEntity<>(robaIliUslugaService.updateRobaIliUsluga(id, robaIliUsluga), HttpStatus.OK);
+        var roba = robaIliUslugaService.updateRobaIliUsluga(id, robaIliUsluga);
+        if (roba != null) {
+            return new ResponseEntity<>(roba, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

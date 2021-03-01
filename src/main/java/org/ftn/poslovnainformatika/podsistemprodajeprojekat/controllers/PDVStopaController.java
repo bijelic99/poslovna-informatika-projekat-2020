@@ -21,15 +21,20 @@ public class PDVStopaController {
         return new ResponseEntity<>(pdvStopaService.getPdvStope(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<PDVStopa> createPdvStopa(@RequestBody PDVStopa pdvStopa) {
-        return new ResponseEntity<>(pdvStopaService.createPdvStopa(pdvStopa), HttpStatus.CREATED);
+    @PostMapping(value = "/{idKategorije}")
+    public ResponseEntity<PDVStopa> createPdvStopa(@PathVariable String idKategorije, @RequestBody PDVStopa pdvStopa) {
+        var stopa = pdvStopaService.createPdvStopa(idKategorije, pdvStopa);
+        if (stopa != null) {
+            return new ResponseEntity<>(stopa, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping(value = "/u/{id}")
     public ResponseEntity<PDVStopa> updatePdvStopa(@PathVariable String id, @RequestBody PDVStopa pdvStopa) {
-        if (id != null) {
-            return new ResponseEntity<>(pdvStopaService.updatePdvStopa(id, pdvStopa), HttpStatus.OK);
+        var stopa = pdvStopaService.updatePdvStopa(id, pdvStopa);
+        if (stopa != null) {
+            return new ResponseEntity<>(stopa, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

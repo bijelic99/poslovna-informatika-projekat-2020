@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class GrupaRobeIliUslugeService {
     private GrupaRobeIliUslugeRepository grupaRobeIliUslugeRepository;
 
     public List<GrupaRobeIliUsluge> getGrupeRobeIliUsluge() {
-        return grupaRobeIliUslugeRepository.findAll();
+        return grupaRobeIliUslugeRepository.findAll().stream().filter(x -> !x.getObrisan()).collect(Collectors.toList());
     }
 
     public GrupaRobeIliUsluge createGrupaRobeIliUsluge(GrupaRobeIliUsluge grupaRobeIliUsluge) {

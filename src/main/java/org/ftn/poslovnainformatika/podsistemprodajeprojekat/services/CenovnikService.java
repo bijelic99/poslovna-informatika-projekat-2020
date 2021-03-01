@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -44,11 +45,15 @@ public class CenovnikService {
     }
 
     public List<Cenovnik> getCenovnici() {
-        return cenovnikRepository.findAll();
+        return cenovnikRepository.findAll().stream().filter(x -> !x.getObrisan()).collect(Collectors.toList());
     }
 
     public Cenovnik getCenovnik(String id) {
-        return cenovnikRepository.getOne(id);
+        var cenovnik = cenovnikRepository.getOne(id);
+        if (!cenovnik.getObrisan()) {
+            return cenovnik;
+        }
+        return null;
     }
 
     public Cenovnik copyCenovnik(Cenovnik cenovnik, int procenat, boolean povecanje) {
