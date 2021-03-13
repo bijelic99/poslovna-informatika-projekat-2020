@@ -1,6 +1,7 @@
 package org.ftn.poslovnainformatika.podsistemprodajeprojekat.controllers;
 
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.PDVStopa;
+import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.PDVStopaRepository;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.services.PDVStopaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,22 @@ public class PDVStopaController {
     @Autowired
     private PDVStopaService pdvStopaService;
 
+    @Autowired
+    private PDVStopaRepository pdvStopaRepository;
+
     @GetMapping
     public ResponseEntity<List<PDVStopa>> getPdvStope() {
         return new ResponseEntity<>(pdvStopaService.getPdvStope(), HttpStatus.OK);
+    }
+
+    @GetMapping("/slobodne")
+    public ResponseEntity<List<PDVStopa>> getSlobodneStope() {
+        return new ResponseEntity<>(pdvStopaRepository.getSlobodneStope(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public PDVStopa createNewPdvStopa(@RequestBody PDVStopa pdvStopa) {
+        return pdvStopaRepository.save(pdvStopa);
     }
 
     @PostMapping(value = "/{idKategorije}")
