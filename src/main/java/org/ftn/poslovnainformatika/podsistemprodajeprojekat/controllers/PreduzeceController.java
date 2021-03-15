@@ -1,20 +1,17 @@
 package org.ftn.poslovnainformatika.podsistemprodajeprojekat.controllers;
 
-import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.Cenovnik;
-import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.PoslovniPartner;
-import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.Preduzece;
-import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.RobaIliUsluga;
+import org.ftn.poslovnainformatika.podsistemprodajeprojekat.model.*;
+import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.NaseljenoMestoRepository;
 import org.ftn.poslovnainformatika.podsistemprodajeprojekat.repository.PreduzeceRepository;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/preduzeca")
@@ -22,6 +19,9 @@ public class PreduzeceController {
 
     @Autowired
     PreduzeceRepository preduzeceRepository;
+
+    @Autowired
+    NaseljenoMestoRepository naseljenoMestoRepository;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Preduzece> getPreduzece(@PathVariable("id") String id) {
@@ -55,5 +55,21 @@ public class PreduzeceController {
             return ResponseEntity.badRequest().build();
         }
 
+    }
+
+    @PostMapping
+    public ResponseEntity<Preduzece> addPreduzece(@RequestBody Preduzece novoPreduzece){
+        novoPreduzece.setId(UUID.randomUUID().toString());
+        try{
+            return ResponseEntity.ok(preduzeceRepository.save(novoPreduzece));
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping(value = "/mesta")
+    public List<NaseljenoMesto> getMesta() {
+        return naseljenoMestoRepository.findAll();
     }
 }
